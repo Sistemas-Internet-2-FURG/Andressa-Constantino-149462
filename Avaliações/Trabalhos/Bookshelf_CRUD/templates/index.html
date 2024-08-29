@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BookShelf</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <header>
+        <img src="../static/logo-icon.png" alt="Logo">
+        <h1>BookShelf</h1>
+    </header>
+    <main>
+        <section id="books">
+            <h2>Livros</h2>
+            <ul id="book-list">
+                {% for livro in livros %}
+                <li>
+                    <div class="bookInfo">
+                        <span>{{ livro.nome }}</span>
+                        <span>De: {{ livro.autor_nome }}</span>
+                        <span>Publicado por: {{ livro.editora_nome }}</span>
+                    </div>
+                    <div class="bookOptions">
+                        <div><a href="{{ url_for('editar_livro', id=livro.id) }}"><img src="../static/edit.png" alt="Editar"></a></div>
+                        <form action="{{ url_for('excluir_livro', id=livro.id) }}" method="post" style="display:inline;">
+                            <button type="submit"><img src="../static/del.png" alt="Excluir"></button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section id="center">
+            <div id="cadastro">
+                <h2>Cadastro</h2>
+                <div id="cadastroOptions">
+                    <a class="new" href="{{ url_for('adicionar_livro') }}">Livro</a>
+                    <a class="new" href="{{ url_for('adicionar_autor') }}">Autor</a>
+                    <a class="new" href="{{ url_for('adicionar_editora') }}">Editora</a>
+                </div>
+            </div>
+            <div id="editors">
+                <h2>Editoras</h2>
+                <ul id="editor-list">
+                    {% for editora in editoras %}
+                    <li>
+                        <div class="editorInfo">
+                            <span>{{ editora.nome }}</span>
+                            <span>Livros Publicados = {{ editora.livros_count }}</span>
+                        </div>
+                        <div class="editorOptions">
+                            <div><a href="{{ url_for('editar_editora', id=editora.id) }}"><img src="../static/edit.png" alt="Editar"></a></div>
+                            <form action="{{ url_for('excluir_editora', id=editora.id) }}" method="post" style="display:inline;">
+                                <button type="submit"><img src="../static/del.png" alt="Excluir"></button>
+                            </form>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <section id="authors">
+            <h2>Autores</h2>
+            <ul id="author-list">
+                {% for autor in autores %}
+                <li>
+                    <div class="authorInfo">
+                        <span>{{ autor.nome }}</span>
+                        <span>Livros Escritos = {{ autor.livros_count }}</span>
+                    </div>
+                    <div class="authorOptions">
+                        <div><a href="{{ url_for('editar_autor', id=autor.id) }}"><img src="../static/edit.png" alt="Editar"></a></div>
+                        <form action="{{ url_for('excluir_autor', id=autor.id) }}" method="post" style="display:inline;">
+                            <button type="submit"><img src="../static/del.png" alt="Excluir"></button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

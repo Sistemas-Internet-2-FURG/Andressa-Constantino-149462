@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap');
+
+button{
+    all: unset;
+    cursor: pointer;    
+}
+button:hover{
+    opacity: 0.7;
+}
+body{
+    background-color: #EEE6DE;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    font-weight: 300;
+    font-family: "Lato", sans-serif;
+}
+header{
+    width: 20%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: space-evenly;
+    font-weight: 100;
+}
+header img{
+    height: 100%;
+    width: auto;
+}
+main{
+    display: flex;
+    width: 100%;
+    height: 85vh;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: start;
+    align-items: start;
+}
+
+#books{
+    width: 25%;
+    background-color: #DAC2B8;
+    height: 85vh;
+    text-align: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#center{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 85vh;
+    text-align: center;
+}
+
+#cadastro{
+    width: 100%;
+    height: 40vh;
+    background-color: #DEBC9C;
+    display: flex;
+    flex-direction: column;
+}
+#editors{
+    width: 100%;
+    height: 40vh;
+    background-color: #7c786e;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#authors{
+    width: 25%;
+    background-color: #D1CABA;
+    height: 85vh;
+    text-align: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#h2{
+    text-align: center;
+}
+
+ul{
+    list-style: none;
+    width: 100%;
+    display: flex;
+    height: 80%;
+    flex-direction: column;
+
+}
+
+li{
+    background-color: #E6DDD2;
+    border: 1px solid #351C02;
+    width: 80%;
+    margin: 2% 0;
+    padding: 2% 0;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.bookOptions, .authorOptions, .editorOptions{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+    align-content: center;
+    width: 20%;
+    justify-content: space-evenly;
+}
+.bookOptions img, .authorOptions img, .editorOptions img{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 20px;
+    width: 20px;
+}
+.authorInfo, .bookInfo, .editorInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    width: 80%;
+}
+#cadastro button, .new{
+    background-color: #E6DDD2;
+    border: 1px solid #351C02;
+    padding: 20px 70px;
+    color: #351C02;
+    text-decoration: none;
+}
+.new:hover{
+    opacity: 0.7;
+}
+#cadastroOptions{
+    display: flex;
+    height: 80%;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 100%;
+    align-content: center;
+    align-items: center;
+}
