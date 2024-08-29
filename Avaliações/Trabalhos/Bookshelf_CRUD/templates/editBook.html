@@ -16,18 +16,17 @@
                 <h3>Editar Livro</h3>
                 <label for="nome">Nome:</label><br>
                 <input type="text" id="nome" name="nome" value="{{ livro.nome }}"><br>
+                
                 <label for="autor">Autor:</label><br>
-                <select id="autor" name="autor">
-                    {% for autor in autores %}
-                        <option value="{{ autor.id }}" {% if autor.id == livro.autor %}selected{% endif %}>{{ autor.nome }}</option>
-                    {% endfor %}
-                </select><br>
+                <input type="text" id="autor" name="autor" value="{{ livro.autor_nome }}" readonly><br>
+                
                 <label for="editora">Editora:</label><br>
                 <select id="editora" name="editora">
                     {% for editora in editoras %}
                         <option value="{{ editora.id }}" {% if editora.id == livro.editora %}selected{% endif %}>{{ editora.nome }}</option>
                     {% endfor %}
                 </select><br>
+                
                 <input type="submit" value="Salvar">
             </form>
         </div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BookShelf</title>
+    <link rel="stylesheet" href="../static/login.css">
+</head>
+<body>
+    <main>
+        <div class="LoginBody">
+            <div class="besideForm">
+                <h1>BookShelf</h1>
+                <h2>Gerencie seus livros de forma simples e eficiente!</h2>
+                <p>
+                    Cadastre suas obras, gerencie autores e editoras, 
+                    e acompanhe tudo em um só lugar. Experimente uma forma 
+                    descomplicada de organizar suas publicações.
+                </p>
+                <img src="../static/books.png">
+                <span id="pictureCredits">Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a></span>
+            </div>
+            <form method="POST" action="{{ url_for('login') }}">
+                <h1>Login</h1>
+                <span class="inputSpan">
+                    <label for="email">E-mail</label>
+                    <input name="email" type="email" placeholder="Digite seu email" required>
+                </span>
+                <span class="inputSpan">
+                    <label for="senha">Senha</label>
+                    <input name="senha" type="password" placeholder="Digite sua senha" required>
+                </span>
+                <span class="submitSpan">
+                    <input type="submit" value="Entrar">
+                    <a href="{{ url_for('registrar') }}">Não tem uma conta? Cadastre aqui!</a>
+                </span>
+            </form>
+        </div>
+    </main>
+    
+</body>
+</html>

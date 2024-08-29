@@ -7,8 +7,14 @@
 </head>
 <body>
     <header>
-        <img src="../static/logo-icon.png" alt="Logo">
-        <h1>BookShelf</h1>
+        <div id="start">
+            <img src="../static/logo-icon.png" alt="Logo">
+            <h1>BookShelf</h1>
+        </div>
+        <div id="end">
+            <a href="{{ url_for('sair') }}">Sair</a>
+        </div>
+
     </header>
     <main>
         <section id="books">
@@ -21,14 +27,23 @@
                         <span>De: {{ livro.autor_nome }}</span>
                         <span>Publicado por: {{ livro.editora_nome }}</span>
                     </div>
+                    {% if livro.autor == session.get('autor_id') %}
                     <div class="bookOptions">
-                        <div><a href="{{ url_for('editar_livro', id=livro.id) }}"><img src="../static/edit.png" alt="Editar"></a></div>
+                        <div>
+                            <a href="{{ url_for('editar_livro', id=livro.id) }}">
+                                <img src="../static/edit.png" alt="Editar">
+                            </a>
+                        </div>
                         <form action="{{ url_for('excluir_livro', id=livro.id) }}" method="post" style="display:inline;">
-                            <button type="submit"><img src="../static/del.png" alt="Excluir"></button>
+                            <button type="submit">
+                                <img src="../static/del.png" alt="Excluir">
+                            </button>
                         </form>
                     </div>
+                    {% endif %}
                 </li>
                 {% endfor %}
+
             </ul>
         </section>
         <section id="center">
@@ -36,7 +51,6 @@
                 <h2>Cadastro</h2>
                 <div id="cadastroOptions">
                     <a class="new" href="{{ url_for('adicionar_livro') }}">Livro</a>
-                    <a class="new" href="{{ url_for('adicionar_autor') }}">Autor</a>
                     <a class="new" href="{{ url_for('adicionar_editora') }}">Editora</a>
                 </div>
             </div>
@@ -69,16 +83,26 @@
                         <span>{{ autor.nome }}</span>
                         <span>Livros Escritos = {{ autor.livros_count }}</span>
                     </div>
+                    <!-- Verifique se o autor logado é o mesmo autor da lista -->
+                    {% if autor.id == session.get('autor_id') %}
                     <div class="authorOptions">
-                        <div><a href="{{ url_for('editar_autor', id=autor.id) }}"><img src="../static/edit.png" alt="Editar"></a></div>
+                        <div>
+                            <a href="{{ url_for('editar_autor', id=autor.id) }}">
+                                <img src="../static/edit.png" alt="Editar">
+                            </a>
+                        </div>
                         <form action="{{ url_for('excluir_autor', id=autor.id) }}" method="post" style="display:inline;">
-                            <button type="submit"><img src="../static/del.png" alt="Excluir"></button>
+                            <button type="submit">
+                                <img src="../static/del.png" alt="Excluir">
+                            </button>
                         </form>
                     </div>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>
         </section>
+        
     </main>
 </body>
 </html>

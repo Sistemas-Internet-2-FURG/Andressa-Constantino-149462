@@ -17,17 +17,15 @@
                 <label for="nome">Nome:</label><br>
                 <input type="text" id="nome" name="nome" placeholder="Digite o nome do livro"><br>
                 <label for="autor">Autor:</label><br>
-                <select id="autor" name="autor">
-                    {% for autor in autores %}
-                        <option value="{{ autor.id }}">{{ autor.nome }}</option>
-                    {% endfor %}
-                </select><br>
+                <input type="text" id="autor" name="autor" value="{{ autor_logado_nome }}" readonly><br>
+                
                 <label for="editora">Editora:</label><br>
                 <select id="editora" name="editora">
                     {% for editora in editoras %}
                         <option value="{{ editora.id }}">{{ editora.nome }}</option>
                     {% endfor %}
                 </select><br>
+                
                 <input type="submit" value="Enviar">
             </form>
         </div>

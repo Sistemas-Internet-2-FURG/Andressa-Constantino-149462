@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Poppins&display=swap');
+body{
+    background-color: #EEE6DE;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    font-weight: 300;
+    font-family: "Lato", sans-serif;
+}
+main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+}
+.LoginBody{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    overflow: hidden;
+}
+
+.LoginBody form{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 55vw;
+    height: 80%;
+    margin: 4rem 0;
+}
+
+.LoginBody form h1{
+    font-weight: 600;
+}
+
+.LoginBody .inputSpan{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.LoginBody .inputSpan label{
+    font-weight: 400;
+}
+
+.LoginBody .submitSpan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.LoginBody .submitSpan input{
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.LoginBody input{
+    height: 3.3rem;
+    background-color: #5a5664;
+    border-radius: 0.3rem;
+    border: 0;
+    padding: 0 2rem;
+    color: white;
+    margin: 1rem 0;
+}
+
+.LoginBody a{
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+}
+
+::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+  
+::-ms-input-placeholder { /* Edge 12 -18 */
+color: white;
+}
+
+/* Adicione esta regra para estilizar o menu suspenso (select) */
+.LoginBody .inputSpan select {
+height: 3.3rem;
+background-color: #EEE6DE;
+border-radius: 0.3rem;
+border: 0;
+padding: 0 2rem;
+color: white;
+margin: 1rem 0;
+cursor: pointer;
+appearance: none; /* Remove a seta padrão do menu suspenso */
+background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Adiciona um ícone de seta personalizado */
+background-repeat: no-repeat;
+background-position: right 1.5rem center; /* Posiciona o ícone à direita do menu suspenso */
+}
+
+.warning{
+all: unset;
+display: inline;
+font-size: 15px;
+color: darkred;
+}
+
+.success{
+all: unset;
+display: inline;
+font-size: 15px;
+color: darkgreen;
+}
+
+.besideForm {
+    padding-top: 3%;
+    width: 45vw;
+    height: 100%;
+    background-color: #5a5664;
+    text-align: center;
+    padding-left: 2%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.logotypeBesideForm {
+    font-size: 2rem;
+    font-family: 'Lobster', cursive;
+    font-weight: 400;
+    text-align: left;
+    margin-bottom: 3rem;
+    width: 100%;
+}
+.besideForm h2{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.355rem;
+    margin: 2% 0;
+    max-width: 70%;
+    text-align: left;
+}
+.besideForm p{
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
+    opacity: 0.8;
+    margin: 3% 0;
+    max-width: 70%;
+    text-align: justify;
+}
+.besideForm img{
+    margin-top: 2rem;
+    width: 63%;
+}
+#pictureCredits a{
+    all: unset;
+    cursor: pointer;
+}
+#pictureCredits{
+    opacity: 0.3;
+}
