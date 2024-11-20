@@ -1,4 +1,4 @@
 MYSQL_HOST = 'localhost'
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'ghssh64.g'
+MYSQL_PASSWORD = ''
 MYSQL_DB = 'bookshelfschema'
