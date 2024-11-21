@@ -20,7 +20,7 @@
                 <img src="../static/books.png">
                 <span id="pictureCredits">Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a></span>
             </div>
-            <form method="POST" action="{{ url_for('registrar') }}">
+            <form id="registerForm">
                 <h1>Cadastrar</h1>
                 <span class="inputSpan">
                     <label for="nome">Nome</label>
@@ -35,9 +35,10 @@
                     <input name="senha" type="password" placeholder="Digite sua senha" required>
                 </span>
                 <button type="submit">Cadastrar</button>
+                <a href="{{ url_for('login_page') }}">Já tem uma conta? Faça login aqui!</a>
             </form>
+            
         </div>
     </main>
-    
 </body>
 </html>

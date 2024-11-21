@@ -53,7 +53,7 @@ main{
     align-content: center;
 }
 
-.LoginBody .submitSpan input{
+.LoginBody .submitSpan input, .submitSpan button{
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;

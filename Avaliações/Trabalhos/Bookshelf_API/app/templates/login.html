@@ -30,7 +30,10 @@
                     <label for="senha">Senha</label>
                     <input name="senha" type="password" placeholder="Digite sua senha" required>
                 </span>
-                <button type="submit">Entrar</button>
+                <span class="submitSpan">
+                    <button type="submit">Entrar</button>
+                    <a href="{{ url_for('register_page') }}">Não tem uma conta? Cadastre aqui!</a>
+                </span>
             </form>
         </div>
     </main>
