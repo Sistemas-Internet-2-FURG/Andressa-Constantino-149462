@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>BookShelf</title>
     <link rel="stylesheet" href="../static/login.css">
-    <script src="../static/js/main.js" defer></script>
+   
 </head>
 <body>
     <main>
@@ -20,7 +20,7 @@
                 <img src="../static/books.png">
                 <span id="pictureCredits">Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a></span>
             </div>
-            <form method="POST" action="{{ url_for('login') }}">
+            <form id="loginForm">
                 <h1>Login</h1>
                 <span class="inputSpan">
                     <label for="email">E-mail</label>
@@ -32,11 +32,52 @@
                 </span>
                 <span class="submitSpan">
                     <button type="submit">Entrar</button>
-                    <a href="{{ url_for('register_page') }}">Não tem uma conta? Cadastre aqui!</a>
+                    <a href="{{ url_for('register') }}" data-register-url="{{ url_for('register') }}">Não tem uma conta? Cadastre aqui!</a>
                 </span>
             </form>
+            
+            
+            
+            
         </div>
     </main>
+    <script>
+       document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.querySelector('#loginForm');
+    
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(loginForm);
+            const jsonData = {};
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+
+            fetch('{{ url_for("login") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    window.location.href = data.redirect;  // Redireciona para a página principal ou dashboard
+                } else {
+                    alert(data.error || 'Erro no login');
+                }
+            })
+            .catch(err => console.error('Erro:', err));
+        });
+    }
+});
+
+
+    </script>
+    
     
 </body>
 </html>

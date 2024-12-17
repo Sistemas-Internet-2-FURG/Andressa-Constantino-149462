@@ -13,8 +13,9 @@ class Livro(db.Model):
     __tablename__ = 'livros'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100), nullable=False)
-    autor_id = db.Column(db.Integer, db.ForeignKey('autores.id'), nullable=False)
-    editora_id = db.Column(db.Integer, db.ForeignKey('editoras.id'), nullable=True)
+    autor = db.Column(db.Integer, db.ForeignKey('autore'), nullable=False)
+    editora = db.Column(db.Integer, db.ForeignKey('editora'), nullable=True)
+
 
 class Editora(db.Model):
     __tablename__ = 'editoras'

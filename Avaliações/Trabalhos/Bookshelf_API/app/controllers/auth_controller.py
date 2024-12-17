@@ -7,10 +7,10 @@ import os
 
 SECRET_KEY = os.getenv('second_secret_key')
 
+
 def login():
-    # Certifique-se de que o conteúdo recebido é JSON
     if request.is_json:
-        data = request.get_json()  # Pegando os dados JSON da requisição
+        data = request.get_json()
         email = data.get('email')
         senha = data.get('senha')
         
@@ -31,7 +31,7 @@ def login():
 
 def register():
     print(f'>>> Request: {request}')
-    data = request.get_json()  # Pega os dados JSON da requisição
+    data = request.get_json()
 
     if not data:
         return {"error": "JSON não encontrado no corpo da requisição"}, 400
