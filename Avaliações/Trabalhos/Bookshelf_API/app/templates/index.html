@@ -13,7 +13,7 @@
                 <h1>BookShelf</h1>
             </div>
             <div id="end">
-                <a href="{{ url_for('login') }}">Sair</a>
+                <a href="{{ url_for('sair') }}">Sair</a>
             </div>
         </header>
     <main>
@@ -30,11 +30,11 @@
                     {% if livro.autor == session.get('autor_id') %}
                     <div class="bookOptions">
                         <div>
-                            <a href="{{ url_for('editar_livro', livro_id=livro.id) }}">
+                            <a href="{{ url_for('editar_livro', id=livro.id) }}">
                                 <img src="../static/edit.png" alt="Editar">
                             </a>
                         </div>
-                        <form action="{{ url_for('excluir_livro', livro_id=livro.id) }}" method="post" style="display:inline;">
+                        <form action="{{ url_for('excluir_livro', id=livro.id) }}" method="post" style="display:inline;">
                             <button type="submit">
                                 <img src="../static/del.png" alt="Excluir">
                             </button>
@@ -64,8 +64,8 @@
                             <span>Livros Publicados = {{ editora.livros_count }}</span>
                         </div>
                         <div class="editorOptions">
-                            <div><a href="{{ url_for('editar_editora', editora_id=editora.id) }}"><img src="../static/edit.png" alt="Editar"></a></div>
-                            <form action="{{ url_for('excluir_editora', editora_id=editora.id) }}" method="post" style="display:inline;">
+                            <div><a href="{{ url_for('editar_editora', id=editora.id) }}"><img src="../static/edit.png" alt="Editar"></a></div>
+                            <form action="{{ url_for('excluir_editora', id=editora.id) }}" method="post" style="display:inline;">
                                 <button type="submit"><img src="../static/del.png" alt="Excluir"></button>
                             </form>
                         </div>
@@ -87,11 +87,11 @@
                     {% if autor.id == session.get('autor_id') %}
                     <div class="authorOptions">
                         <div>
-                            <a href="{{ url_for('editar_autor', autor_id=autor.id) }}">
+                            <a href="{{ url_for('editar_autor', id=autor.id) }}">
                                 <img src="../static/edit.png" alt="Editar">
                             </a>
                         </div>
-                        <form action="{{ url_for('excluir_autor', autor_id=autor.id) }}" method="post" style="display:inline;">
+                        <form action="{{ url_for('excluir_autor', id=autor.id) }}" method="post" style="display:inline;">
                             <button type="submit">
                                 <img src="../static/del.png" alt="Excluir">
                             </button>

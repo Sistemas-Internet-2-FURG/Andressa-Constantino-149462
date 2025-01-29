@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>BookShelf</title>
     <link rel="stylesheet" href="../static/login.css">
+    <script src="../static/js/main.js" defer></script>
 </head>
 <body>
     <main>
@@ -19,7 +20,7 @@
                 <img src="../static/books.png">
                 <span id="pictureCredits">Illustration by <a href="https://icons8.com/illustrations/author/zD2oqC8lLBBA">Icons 8</a> from <a href="https://icons8.com/illustrations">Ouch!</a></span>
             </div>
-            <form id="registerForm">
+            <form method="POST" action="{{ url_for('registrar') }}">
                 <h1>Cadastrar</h1>
                 <span class="inputSpan">
                     <label for="nome">Nome</label>
@@ -34,46 +35,9 @@
                     <input name="senha" type="password" placeholder="Digite sua senha" required>
                 </span>
                 <button type="submit">Cadastrar</button>
-                <a href="{{ url_for('login') }}">Já tem uma conta? Faça login aqui!</a>
             </form>
-            
-            
         </div>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const registerForm = document.querySelector('#registerForm');
-            
-            if (registerForm) {
-                registerForm.addEventListener('submit', function (event) {
-                    event.preventDefault();
-    
-                    const formData = new FormData(registerForm);
-                    const jsonData = {};
-                    formData.forEach((value, key) => {
-                        jsonData[key] = value;
-                    });
-    
-                    fetch('{{ url_for("register") }}', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(jsonData),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            window.location.href = data.redirect;
-                        } else {
-                            alert(data.error || 'Erro no cadastro');
-                        }
-                    })
-                    .catch(err => console.error('Erro:', err));
-                });
-            }
-        });
-    </script>
     
 </body>
 </html>

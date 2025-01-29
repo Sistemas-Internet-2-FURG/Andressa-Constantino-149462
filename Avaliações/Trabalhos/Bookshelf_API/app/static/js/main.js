@@ -1,4 +1,47 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Handle login form submission
+    const loginForm = document.querySelector('form[action="{{ url_for("login") }}"]');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(loginForm);
+            fetch('/api/login', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '/';
+                    } else {
+                        alert('Credenciais inválidas');
+                    }
+                })
+                .catch(err => console.error('Erro:', err));
+        });
+    }
+
+    // Handle registration form submission
+    const registerForm = document.querySelector('form[action="{{ url_for("registrar") }}"]');
+    if (registerForm) {
+        registerForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(registerForm);
+            fetch('/api/register', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '/login';
+                    } else {
+                        alert('Erro no cadastro');
+                    }
+                })
+                .catch(err => console.error('Erro:', err));
+        });
+    }
 
     // Handle book form submissions
     const bookForms = document.querySelectorAll('form[action="{{ url_for("adicionar_livro") }}"], form[action="{{ url_for("editar_livro") }}"]');

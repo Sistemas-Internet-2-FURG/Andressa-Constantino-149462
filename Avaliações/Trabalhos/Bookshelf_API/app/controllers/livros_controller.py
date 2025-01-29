@@ -6,16 +6,16 @@ def get_livros():
     return jsonify([{
         "id": livro.id,
         "nome": livro.nome,
-        "autor": livro.autor,
-        "editora": livro.editora
+        "autor_id": livro.autor_id,
+        "editora_id": livro.editora_id
     } for livro in livros]), 200
 
 def create_livro():
     data = request.json
     novo_livro = Livro(
         nome=data['nome'],
-        autor=data['autor'],
-        editora=data['editora']
+        autor_id=data['autor_id'],
+        editora_id=data['editora_id']
     )
     db.session.add(novo_livro)
     db.session.commit()
@@ -29,7 +29,7 @@ def update_livro(livro_id):
         return jsonify({"error": "Livro não encontrado"}), 404
 
     livro.nome = data.get('nome', livro.nome)
-    livro.editora = data.get('editora', livro.editora)
+    livro.editora_id = data.get('editora_id', livro.editora_id)
 
     db.session.commit()
     return jsonify({"message": "Livro atualizado com sucesso"}), 200
