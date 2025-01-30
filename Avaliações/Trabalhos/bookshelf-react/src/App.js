@@ -10,7 +10,8 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<BookList />} />
+        <Route path="/index" element={<BookList />} />
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
@@ -39,15 +40,15 @@ function BookList() {
   const [authors, setAuthors] = useState([]);
   
   useEffect(() => {
-    axios.get("/api/livros")
+    axios.get("http://127.0.0.1:5000/api/livros")
       .then((response) => setBooks(response.data))
       .catch((error) => console.error("Erro ao buscar livros:", error));
     
-    axios.get("/api/editoras")
+    axios.get("http://127.0.0.1:5000/api/editoras")
       .then((response) => setEditors(response.data))
       .catch((error) => console.error("Erro ao buscar editoras:", error));
 
-    axios.get("/api/autores")
+    axios.get("http://127.0.0.1:5000/api/autores")
       .then((response) => setAuthors(response.data))
       .catch((error) => console.error("Erro ao buscar autores:", error));
   }, []);
@@ -66,10 +67,10 @@ function BookList() {
               </div>
               {book.autor === 'autor_id_aqui' && (
                 <div className="bookOptions">
-                  <a href={`/editar_livro/${book.id}`}>
+                  <a href={`http://127.0.0.1:5000/editar_livro/${book.id}`}>
                     <img src="../static/edit.png" alt="Editar" />
                   </a>
-                  <form action={`/excluir_livro/${book.id}`} method="post" style={{ display: 'inline' }}>
+                  <form action={`http://127.0.0.1:5000/excluir_livro/${book.id}`} method="post" style={{ display: 'inline' }}>
                     <button type="submit">
                       <img src="../static/del.png" alt="Excluir" />
                     </button>
@@ -80,7 +81,14 @@ function BookList() {
           ))}
         </ul>
       </section>
-
+      <section id="center">
+            <div id="cadastro">
+                <h2>Cadastro</h2>
+                <div id="cadastroOptions"> {/* Editar aqui route p outr apagina no react */}
+                    <a class="new" href={`http://127.0.0.1:5000/adicionar_livro`}>Livro</a>
+                    <a class="new" href={`http://127.0.0.1:5000/adicionar_editora`}>Editora</a>
+                </div>
+            </div>
       <section id="editors">
         <h2>Editoras</h2>
         <ul>
@@ -91,10 +99,10 @@ function BookList() {
                 <span>Livros Publicados = {editora.livros_count}</span>
               </div>
               <div className="editorOptions">
-                <a href={`/editar_editora/${editora.id}`}>
+                <a href={`http://127.0.0.1:5000/editar_editora/${editora.id}`}>
                   <img src="../static/edit.png" alt="Editar" />
                 </a>
-                <form action={`/excluir_editora/${editora.id}`} method="post" style={{ display: 'inline' }}>
+                <form action={`http://127.0.0.1:5000/excluir_editora/${editora.id}`} method="post" style={{ display: 'inline' }}>
                   <button type="submit">
                     <img src="../static/del.png" alt="Excluir" />
                   </button>
@@ -103,6 +111,7 @@ function BookList() {
             </li>
           ))}
         </ul>
+      </section>
       </section>
 
       <section id="authors">
@@ -116,10 +125,10 @@ function BookList() {
               </div>
               {autor.id === 'autor_id_aqui' && (
                 <div className="authorOptions">
-                  <a href={`/editar_autor/${autor.id}`}>
+                  <a href={`http://127.0.0.1:5000/editar_autor/${autor.id}`}>
                     <img src="../static/edit.png" alt="Editar" />
                   </a>
-                  <form action={`/excluir_autor/${autor.id}`} method="post" style={{ display: 'inline' }}>
+                  <form action={`http://127.0.0.1:5000/excluir_autor/${autor.id}`} method="post" style={{ display: 'inline' }}>
                     <button type="submit">
                       <img src="../static/del.png" alt="Excluir" />
                     </button>

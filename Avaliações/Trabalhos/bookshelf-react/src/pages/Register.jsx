@@ -7,7 +7,8 @@ function Register() {
     event.preventDefault();
     const formData = new FormData(event.target);
     try {
-      const response = await axios.post("/api/register", Object.fromEntries(formData));
+      const response = await axios.post("http://127.0.0.1:5000/api/register", Object.fromEntries(formData));
+
       console.log("Cadastro bem-sucedido:", response.data);
     } catch (error) {
       console.error("Erro no cadastro:", error);
