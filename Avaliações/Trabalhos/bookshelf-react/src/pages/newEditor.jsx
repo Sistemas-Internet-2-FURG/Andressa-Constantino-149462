@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import "../edit.css";
+import "../styles.css";
 
-function EditEditor() {
+function NewEditor() {
   const [editorName, setEditorName] = useState("");
 
   const handleSubmit = async (event) => {
@@ -45,4 +45,4 @@ function EditEditor() {
   );
 }
 
-export default EditEditor;
+export default NewEditor;

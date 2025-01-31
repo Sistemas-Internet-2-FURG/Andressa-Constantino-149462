@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import "../edit.css";
+import "../styles.css";
 
 function EditAuthor() {
   const { id } = useParams();

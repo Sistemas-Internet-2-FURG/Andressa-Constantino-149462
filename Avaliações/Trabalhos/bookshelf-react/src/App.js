@@ -4,8 +4,11 @@ import axios from "axios";
 import "./styles.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import newBook from "./pages/newBook";
-import newEditor from "./pages/newEditor";
+import NewBook from "./pages/newBook";
+import NewEditor from "./pages/newEditor";
+import EditEditor from "./pages/editEditor";
+import EditBook from "./pages/editBook";
+import EditAuthor from "./pages/editAuthor";
 
 function App() {
   return (
@@ -16,8 +19,11 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/newBook" element={<newBook />} />
-        <Route path="/newEditor" element={<newEditor />} />
+        <Route path="/newBook" element={<NewBook />} />
+        <Route path="/newEditor" element={<NewEditor />} />
+        <Route path="/editEditor" element={<EditEditor />} />
+        <Route path="/editBook" element={<EditBook />} />
+        <Route path="/editAuthor" element={<EditAuthor />} />
       </Routes>
     </Router>
   );
@@ -86,9 +92,9 @@ function BookList() {
       <section id="center">
             <div id="cadastro">
                 <h2>Cadastro</h2>
-                <div id="cadastroOptions"> {/* Editar aqui route p outr apagina no react */}
-                    <a class="new" href={`http://127.0.0.1:5000/adicionar_livro`}>Livro</a>
-                    <a class="new" href={`http://127.0.0.1:5000/adicionar_editora`}>Editora</a>
+                <div id="cadastroOptions">
+                <a className="new" as={Link} href="/newBook">Livro</a>
+                <a className="new" as={Link} href="/newEditor">Editora</a>
                 </div>
             </div>
       <section id="editors">

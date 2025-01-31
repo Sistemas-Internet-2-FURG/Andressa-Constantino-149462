@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "../edit.css";
+import "../styles.css";
 
-function AddBook() {
+function NewBook() {
   const [editors, setEditors] = useState([]);
   const [authorName, setAuthorName] = useState("");
   const [bookName, setBookName] = useState("");
@@ -82,4 +82,4 @@ function AddBook() {
   );
 }
 
-export default AddBook;
+export default NewBook;
