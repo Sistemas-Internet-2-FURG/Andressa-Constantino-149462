@@ -9,6 +9,7 @@ import NewEditor from "./pages/newEditor";
 import EditEditor from "./pages/editEditor";
 import EditBook from "./pages/editBook";
 import EditAuthor from "./pages/editAuthor";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   return (
@@ -21,9 +22,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/newBook" element={<NewBook />} />
         <Route path="/newEditor" element={<NewEditor />} />
-        <Route path="/editEditor" element={<EditEditor />} />
-        <Route path="/editBook" element={<EditBook />} />
-        <Route path="/editAuthor" element={<EditAuthor />} />
+        <Route path="/editEditor/:id" element={<EditEditor />} />
+        <Route path="/editBook/:id" element={<EditBook />} />
+        <Route path="/editAuthor/:id" element={<EditAuthor />} />
       </Routes>
     </Router>
   );
@@ -35,10 +36,6 @@ function Header() {
       <div id="start">
         <img src="/static/logo-icon.png" alt="Logo" />
         <h1>BookShelf</h1>
-      </div>
-      <div id="end">
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
       </div>
     </header>
   );
@@ -72,17 +69,29 @@ function BookList() {
             <li key={book.id}>
               <div className="bookInfo">
                 <span>{book.nome}</span>
-                <span>De: {authors.find(a => a.id === book.autor_id)?.nome || "Desconhecido"}</span>
-                <span>Publicado por: {editors.find(e => e.id === book.editora_id)?.nome || "Desconhecido"}</span>
+                <span>De: {authors.find(a => a.id === book.autor)?.nome || "Desconhecido"}</span>
+                <span>Publicado por: {editors.find(e => e.id === book.editora)?.nome || "Desconhecido"}</span>
               </div>
                 <div className="bookOptions">
-                  <a href={`http://127.0.0.1:5000/editar_livro/${book.id}`}>
+                  <a href={`/editBook/${book.id}`}>
                     <img src="../static/edit.png" alt="Editar" />
                   </a>
-                  <form action={`http://127.0.0.1:5000/excluir_livro/${book.id}`} method="post" style={{ display: 'inline' }}>
-                    <button type="submit">
-                      <img src="../static/del.png" alt="Excluir" />
-                    </button>
+                  <form style={{ display: 'inline' }}>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        await axios.delete(`http://127.0.0.1:5000/api/livros/${book.id}`);
+                        alert("Livro excluído com sucesso!");
+                        window.location.reload();
+                      } catch (error) {
+                        console.error("Erro ao excluir livro:", error);
+                        alert("Erro ao excluir livro.");
+                      }
+                    }}
+                  >
+                    <img src="../static/del.png" alt="Excluir" />
+                  </button>
                   </form>
                 </div>
             </li>
@@ -104,14 +113,25 @@ function BookList() {
             <li key={editora.id}>
               <div className="editorInfo">
                 <span>{editora.nome}</span>
-                <span>Livros Publicados = {editora.livros_count}</span>
               </div>
               <div className="editorOptions">
-                <a href={`http://127.0.0.1:5000/editar_editora/${editora.id}`}>
+                <a href={`/editEditor/${editora.id}`}>
                   <img src="../static/edit.png" alt="Editar" />
                 </a>
-                <form action={`http://127.0.0.1:5000/excluir_editora/${editora.id}`} method="post" style={{ display: 'inline' }}>
-                  <button type="submit">
+                <form style={{ display: 'inline' }}>
+                <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        await axios.delete(`http://127.0.0.1:5000/api/editoras/${editora.id}`);
+                        alert("Editora excluído com sucesso!");
+                        window.location.reload();
+                      } catch (error) {
+                        console.error("Erro ao excluir livro:", error);
+                        alert("Não é possível excluir a editora");
+                      }
+                    }}
+                  >
                     <img src="../static/del.png" alt="Excluir" />
                   </button>
                 </form>
@@ -129,16 +149,27 @@ function BookList() {
             <li key={autor.id}>
               <div className="authorInfo">
                 <span>{autor.nome}</span>
-                <span>Livros Escritos = {autor.livros_count}</span>
               </div>
                 <div className="authorOptions">
-                  <a href={`http://127.0.0.1:5000/editar_autor/${autor.id}`}>
+                  <a href={`/editAuthor/${autor.id}`}>
                     <img src="../static/edit.png" alt="Editar" />
                   </a>
-                  <form action={`http://127.0.0.1:5000/excluir_autor/${autor.id}`} method="post" style={{ display: 'inline' }}>
-                    <button type="submit">
-                      <img src="../static/del.png" alt="Excluir" />
-                    </button>
+                  <form style={{ display: 'inline' }}>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        await axios.delete(`http://127.0.0.1:5000/api/autores/${autor.id}`);
+                        alert("Autor excluído com sucesso!");
+                        window.location.reload();
+                      } catch (error) {
+                        console.error("Erro ao excluir livro:", error);
+                        alert("Não é possível excluir o autor");
+                      }
+                    }}
+                  >
+                    <img src="../static/del.png" alt="Excluir" />
+                  </button>
                   </form>
                 </div>
             </li>

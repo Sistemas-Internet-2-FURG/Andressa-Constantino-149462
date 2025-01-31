@@ -1,16 +1,20 @@
 import axios from "axios";
 import "../login.css";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 function Register() {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     try {
       const response = await axios.post("http://127.0.0.1:5000/api/register", Object.fromEntries(formData));
-
       console.log("Cadastro bem-sucedido:", response.data);
+      navigate("/login")
     } catch (error) {
       console.error("Erro no cadastro:", error);
+      alert("Erro no registro");
     }
   };
 

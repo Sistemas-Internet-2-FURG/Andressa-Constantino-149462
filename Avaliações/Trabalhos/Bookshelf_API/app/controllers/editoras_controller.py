@@ -38,7 +38,7 @@ def delete_editora(editora_id):
     if not editora:
         return jsonify({"error": "Editora não encontrada"}), 404
 
-    if Livro.query.filter_by(editora_id=editora_id).first():
+    if Livro.query.filter_by(editora=editora_id).first():
         return jsonify({"error": "Não é possível excluir a editora, pois há livros associados"}), 400
 
     db.session.delete(editora)

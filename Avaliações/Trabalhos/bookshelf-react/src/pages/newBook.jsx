@@ -1,41 +1,42 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles.css";
+import { useNavigate } from "react-router-dom";
 
 function NewBook() {
+  const navigate = useNavigate();
   const [editors, setEditors] = useState([]);
-  const [authorName, setAuthorName] = useState("");
+  const [authors, setAuthors] = useState([]);
   const [bookName, setBookName] = useState("");
   const [selectedEditor, setSelectedEditor] = useState("");
+  const [selectedAuthor, setSelectedAuthor] = useState("");
 
   useEffect(() => {
     axios.get("http://127.0.0.1:5000/api/editoras")
       .then((response) => setEditors(response.data))
       .catch((error) => console.error("Erro ao buscar editoras:", error));
     
-    axios.get("http://127.0.0.1:5000/api/autor_logado")
-      .then((response) => setAuthorName(response.data.nome))
-      .catch((error) => console.error("Erro ao buscar autor logado:", error));
+    axios.get("http://127.0.0.1:5000/api/autores")
+      .then((response) => setAuthors(response.data))
+      .catch((error) => console.error("Erro ao buscar autores:", error));
   }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = { nome: bookName, autor: authorName, editora: selectedEditor };
+    const formData = { nome: bookName, autor: selectedAuthor, editora: selectedEditor };
     
     try {
-      await axios.post("http://127.0.0.1:5000/api/adicionar_livro", formData);
+      await axios.post("http://127.0.0.1:5000/api/livros", formData);
       alert("Livro cadastrado com sucesso!");
+      navigate("/index")
     } catch (error) {
       console.error("Erro ao cadastrar livro:", error);
+      alert("Erro ao cadastrar livro");
     }
   };
 
   return (
     <div>
-      <header>
-        <img src="../static/logo-icon.png" alt="Logo" />
-        <h1>BookShelf</h1>
-      </header>
       <main>
         <div id="formBox">
           <form onSubmit={handleSubmit}>
@@ -52,13 +53,18 @@ function NewBook() {
             />
             
             <label htmlFor="autor">Autor:</label>
-            <input 
-              type="text" 
+            <select 
               id="autor" 
               name="autor" 
-              value={authorName} 
-              readOnly
-            />
+              value={selectedAuthor} 
+              onChange={(e) => setSelectedAuthor(e.target.value)}
+              required
+            >
+              <option value="">Selecione um autor</option>
+              {authors.map((autor) => (
+                <option key={autor.id} value={autor.id}>{autor.nome}</option>
+              ))}
+            </select>
             
             <label htmlFor="editora">Editora:</label>
             <select 

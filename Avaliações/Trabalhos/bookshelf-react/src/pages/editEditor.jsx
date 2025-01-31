@@ -9,16 +9,19 @@ function EditEditor() {
   const [editor, setEditor] = useState({ nome: "" });
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/api/editoras/${id}`)
-      .then(response => setEditor(response.data))
-      .catch(error => console.error("Erro ao buscar editora:", error));
+    axios.get("http://127.0.0.1:5000/api/editoras")
+      .then((response) => {
+        const editoraEncontrado = response.data.find((editora) => editora.id === Number(id));
+        if (editoraEncontrado) setEditor(editoraEncontrado);
+      })
+      .catch((error) => console.error("Erro ao buscar livros:", error));
   }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`http://127.0.0.1:5000/api/editar_editora/${id}`, editor);
-      navigate("/");
+      await axios.put(`http://127.0.0.1:5000/api/editoras/${id}`, editor);
+      navigate("/index");
     } catch (error) {
       console.error("Erro ao editar editora:", error);
     }

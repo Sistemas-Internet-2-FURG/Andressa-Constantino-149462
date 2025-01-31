@@ -1,8 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import "../styles.css";
+import { useNavigate } from "react-router-dom";
 
 function NewEditor() {
+  const navigate = useNavigate();
   const [editorName, setEditorName] = useState("");
 
   const handleSubmit = async (event) => {
@@ -10,19 +12,17 @@ function NewEditor() {
     const formData = { nome: editorName };
     
     try {
-      await axios.post("http://127.0.0.1:5000/api/adicionar_editora", formData);
+      await axios.post("http://127.0.0.1:5000/api/editoras", formData);
       alert("Editora salva com sucesso!");
+      navigate("/index")
     } catch (error) {
       console.error("Erro ao salvar editora:", error);
+      alert("Erro ao cadastrar editora");
     }
   };
 
   return (
     <div>
-      <header>
-        <img src="../static/logo-icon.png" alt="Logo" />
-        <h1>BookShelf</h1>
-      </header>
       <main>
         <div id="formBox">
           <form onSubmit={handleSubmit}>

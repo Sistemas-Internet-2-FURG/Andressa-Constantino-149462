@@ -6,26 +6,41 @@ import "../styles.css";
 function EditBook() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [book, setBook] = useState({ nome: "", autor_nome: "", editora: "" });
   const [editors, setEditors] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [selectedEditor, setSelectedEditor] = useState("");
+  const [selectedAuthor, setSelectedAuthor] = useState("");
+  const [books, setBooks] = useState([]);
+  const [book, setBook] = useState({ nome: "", autor_nome: "", editora: "" });
 
   useEffect(() => {
-    axios.get(`http://127.0.0.1:5000/api/livros/${id}`)
-      .then(response => setBook(response.data))
-      .catch(error => console.error("Erro ao buscar livro:", error));
-
+    axios.get("http://127.0.0.1:5000/api/livros")
+      .then((response) => {
+        setBooks(response.data);
+        const livroEncontrado = response.data.find((livro) => livro.id === Number(id));
+        if (livroEncontrado) setBook(livroEncontrado);
+      })
+      .catch((error) => console.error("Erro ao buscar livros:", error));
+  
     axios.get("http://127.0.0.1:5000/api/editoras")
-      .then(response => setEditors(response.data))
-      .catch(error => console.error("Erro ao buscar editoras:", error));
+      .then((response) => setEditors(response.data))
+      .catch((error) => console.error("Erro ao buscar editoras:", error));
+  
+    axios.get("http://127.0.0.1:5000/api/autores")
+      .then((response) => setAuthors(response.data))
+      .catch((error) => console.error("Erro ao buscar autores:", error));
   }, [id]);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`http://127.0.0.1:5000/api/editar_livro/${id}`, book);
-      navigate("/");
+      await axios.put(`http://127.0.0.1:5000/api/livros/${id}`, book);
+      alert("Livro editado com sucesso!");
+      navigate("/index")
     } catch (error) {
       console.error("Erro ao editar livro:", error);
+      alert("Erro ao editar livro");
     }
   };
 
@@ -44,21 +59,41 @@ function EditBook() {
           />
 
           <label htmlFor="autor">Autor:</label>
-          <input type="text" id="autor" name="autor" value={book.autor_nome} readOnly />
+          <select 
+            id="autor" 
+            name="autor" 
+            value={selectedAuthor} 
+            onChange={(e) => {
+                const authorId = Number(e.target.value); // Garante que o ID seja um número
+                setSelectedAuthor(authorId);
+                setBook({ ...book, autor: authorId }); // Atualiza o valor do autor no livro
+            }}
+            required
+            >
+            <option value={book.autor}>{authors.find((autor) => autor.id === book.autor)?.nome}</option>
+            {authors.map((autor) => (
+                <option key={autor.id} value={autor.id}>{autor.nome}</option>
+            ))}
+            </select>
 
           <label htmlFor="editora">Editora:</label>
           <select 
             id="editora" 
             name="editora" 
-            value={book.editora}
-            onChange={(e) => setBook({ ...book, editora: e.target.value })}
-          >
-            {editors.map(editora => (
-              <option key={editora.id} value={editora.id}>
-                {editora.nome}
-              </option>
+            value={selectedEditor} 
+            onChange={(e) => {
+                const editorId = Number(e.target.value); // Garante que o ID seja um número
+                setSelectedEditor(editorId);
+                setBook({ ...book, editora: editorId }); // Atualiza o valor da editora no livro
+            }}
+            required
+            >
+            <option value={book.editora}>{editors.find((editora) => editora.id === book.editora)?.nome}</option>
+            {editors.map((editora) => (
+                <option key={editora.id} value={editora.id}>{editora.nome}</option>
             ))}
-          </select>
+            </select>
+
 
           <input type="submit" value="Salvar" />
         </form>
