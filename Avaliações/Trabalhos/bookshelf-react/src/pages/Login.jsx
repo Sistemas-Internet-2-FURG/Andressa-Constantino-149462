@@ -1,18 +1,19 @@
 import axios from "axios";
 import "../login.css";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     try {
       const response = await axios.post("http://127.0.0.1:5000/api/login", Object.fromEntries(formData));
       console.log("Login bem-sucedido:", response.data);
-      Navigate("/index")
       toast.success("Login realizado com sucesso!", { autoClose: 2000 });
+      navigate("/index")
     } catch (error) {
       console.error("Erro no login:", error);
       toast.error("Erro no login", { autoClose: 4000 })

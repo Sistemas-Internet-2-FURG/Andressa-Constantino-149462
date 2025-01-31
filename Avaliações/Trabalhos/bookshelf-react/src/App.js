@@ -4,6 +4,8 @@ import axios from "axios";
 import "./styles.css";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import newBook from "./pages/newBook";
+import newEditor from "./pages/newEditor";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/newBook" element={<newBook />} />
+        <Route path="/newEditor" element={<newEditor />} />
       </Routes>
     </Router>
   );
@@ -62,10 +66,9 @@ function BookList() {
             <li key={book.id}>
               <div className="bookInfo">
                 <span>{book.nome}</span>
-                <span>De: {book.autor_nome}</span>
-                <span>Publicado por: {book.editora_nome}</span>
+                <span>De: {authors.find(a => a.id === book.autor_id)?.nome || "Desconhecido"}</span>
+                <span>Publicado por: {editors.find(e => e.id === book.editora_id)?.nome || "Desconhecido"}</span>
               </div>
-              {book.autor === 'autor_id_aqui' && (
                 <div className="bookOptions">
                   <a href={`http://127.0.0.1:5000/editar_livro/${book.id}`}>
                     <img src="../static/edit.png" alt="Editar" />
@@ -76,7 +79,6 @@ function BookList() {
                     </button>
                   </form>
                 </div>
-              )}
             </li>
           ))}
         </ul>
@@ -123,7 +125,6 @@ function BookList() {
                 <span>{autor.nome}</span>
                 <span>Livros Escritos = {autor.livros_count}</span>
               </div>
-              {autor.id === 'autor_id_aqui' && (
                 <div className="authorOptions">
                   <a href={`http://127.0.0.1:5000/editar_autor/${autor.id}`}>
                     <img src="../static/edit.png" alt="Editar" />
@@ -134,7 +135,6 @@ function BookList() {
                     </button>
                   </form>
                 </div>
-              )}
             </li>
           ))}
         </ul>

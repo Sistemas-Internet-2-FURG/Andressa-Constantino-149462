@@ -1,5 +1,4 @@
 import axios from "axios";
-import "../styles.css";
 import "../login.css";
 
 function Register() {

@@ -5,7 +5,8 @@ def get_editoras():
     editoras = Editora.query.all()
     return jsonify([{
         "id": editora.id,
-        "nome": editora.nome
+        "nome": editora.nome,
+        "livros_count": editora.livros_count
     } for editora in editoras]), 200
 
 def create_editora():
