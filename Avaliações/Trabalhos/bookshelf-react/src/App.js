@@ -9,7 +9,6 @@ import NewEditor from "./pages/newEditor";
 import EditEditor from "./pages/editEditor";
 import EditBook from "./pages/editBook";
 import EditAuthor from "./pages/editAuthor";
-import { useNavigate } from "react-router-dom";
 
 function App() {
   return (

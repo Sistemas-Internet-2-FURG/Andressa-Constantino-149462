@@ -64,9 +64,9 @@ function EditBook() {
             name="autor" 
             value={selectedAuthor} 
             onChange={(e) => {
-                const authorId = Number(e.target.value); // Garante que o ID seja um número
+                const authorId = Number(e.target.value);
                 setSelectedAuthor(authorId);
-                setBook({ ...book, autor: authorId }); // Atualiza o valor do autor no livro
+                setBook({ ...book, autor: authorId });
             }}
             required
             >
@@ -82,9 +82,9 @@ function EditBook() {
             name="editora" 
             value={selectedEditor} 
             onChange={(e) => {
-                const editorId = Number(e.target.value); // Garante que o ID seja um número
+                const editorId = Number(e.target.value);
                 setSelectedEditor(editorId);
-                setBook({ ...book, editora: editorId }); // Atualiza o valor da editora no livro
+                setBook({ ...book, editora: editorId });
             }}
             required
             >
